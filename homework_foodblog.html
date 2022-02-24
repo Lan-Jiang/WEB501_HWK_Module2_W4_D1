@@ -87,25 +87,31 @@
     <aside id="leftside"></aside>
     <aside id="rightside"></aside>
     <div id="container">
-    <header><span>Food Blog</span></header>
+        
+    <!-- Change header to components -->
+    <header id="component1">
+        <component_header></component_header>
+    </header>
 
     <main>
     
     <aside id="photos">
         <img src="images/chili.jpg" alt="White Chicken Chili" width="180">
     </aside>
-    <h2>Comments</h2>
-    
+
+    <div id="component2">
+        <main_h2></main_h2>
+    </div>
     
     <section id="blogposts">
-    
+
     <div class="post">
-        <span class="author">Brianna</span> — 
-        <span class="date">February 18, 2021 @ 3:30 pm</span>
-        <span class="reply">REPLY</span>
-        <p>
-        Was amazing! My Walmart didn’t have coriander in stock and didn’t have ground cumin. I used serrano instead of jalapeño. It was just like my favorite tortilla soup from BJs. I am sending this recipe to my family. I want everyone to try it!
-        </p>
+        <div id="post1">
+            <span>{{ obj1.author }}</span> — 
+            <span>{{ obj1.date }}</span>
+            <span>{{ obj1.reply }}</span>
+            <p>{{ obj1.p }}</p>
+        </div>
     </div>
 
     <div class="post">
@@ -136,7 +142,6 @@
     </div>  
 
     </section>
-
     </main>
 
     <footer>
@@ -144,6 +149,43 @@
     </footer>
     
 </div>
+
+<script>
+    Vue.component('component_header', {
+        template: '<div><span>Food Blog</span></div>'
+    }); // Global
+
+    var vm1 = new Vue({
+        el: '#component1'
+    })
+
+    // Vue.component('main_h2', {
+    //     template: '<div><h2>Comments</h2></div>'
+    // });
+
+    var vm1 = new Vue({
+        el: '#component2',
+        components: {
+            'main_h2': {
+                template: '<div><h2>Comments</h2></div>' 
+            }
+        }
+    }) // Local components
+    
+    var app = new Vue({
+        el: '#post1',
+        data: {
+            obj1: {
+                author: 'Brianna',
+                date: 'February 18, 2021 @ 3:30 pm',
+                reply: 'REPLY',
+                p: 'Was amazing! My Walmart didn’t have coriander in stock and didn’t have ground cumin. I used serrano instead of jalapeño. It was just like my favorite tortilla soup from BJs. I am sending this recipe to my family. I want everyone to try it!'
+            }
+        }
+    });
+
+
+</script>
 
 </body>
 </html>
